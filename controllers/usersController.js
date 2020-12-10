@@ -21,7 +21,6 @@ exports.get_users = async (req, res, next) => {
   // on post request 
 
   exports.add_user = async (req, res) => { 
-    console.log(req.body)
 
     req.body.firstName
 
@@ -40,6 +39,22 @@ exports.get_users = async (req, res, next) => {
       res.send("An error occured")
     }
 
-
-
   };
+
+exports.delete_user = async (req, res) => {
+  try{
+    await UserModel.destroy({
+
+      where: {
+        id: req.params.id,
+      },
+      
+    });
+    console.log("deger", req.params.id)
+
+  res.redirect("/users")
+  }catch (error) {
+    console.log("error". error)
+  }
+}
+
